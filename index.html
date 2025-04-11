@@ -142,9 +142,9 @@
         
 
         nav {
-            background: #222;
+            background: #1e1e1e;
             color: white;
-            padding: 15px 30px;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -156,18 +156,21 @@
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
+            line-height: 1.2;
         }
 
         .nav-links {
             list-style: none;
             display: flex;
             gap: 20px;
+            line-height: 1.5;
         }
 
         .nav-links li a {
             color: white;
             text-decoration: none;
             font-weight: 500;
+            line-height: 1.5;
         }
 
         .nav-links li a:hover {
@@ -382,13 +385,71 @@
                 gap: 10px;
             }
         }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #999;
+            border-radius: 10px;
+            padding: 2px;
+            cursor: pointer;
+            align-items: center;
+            padding-bottom: 20px;
+          }
+          
+          .hamburger span {
+            height: 3px;
+            background: #ccc;
+            border-radius: 2px;
+            margin: 4px 0;
+            transition: 0.3s;
+          }
+          
+
+          @media (max-width: 768px) {
+            .hamburger {
+              display: flex;
+              align-items: right;
+            }
+          
+            .nav-links {
+              position: absolute;
+              top: 60px;
+              left: 0;
+              background: #1e1e1e;
+              width: 100%;
+              flex-direction: column;
+              align-items: flex-start;
+              padding: 1rem 2rem;
+              transform: translateX(-100%);
+              transition: 0.3s ease-in-out;
+            }
+          
+            .nav-links.active {
+              transform: translateX(0);
+            }
+          
+            .nav-links li {
+              padding: 10px 0;
+              width: 100%;
+            }
+          
+            .nav-links li a {
+              width: 100%;
+              display: inline-block;
+            }
+          }
       
     </style>
 </head>
 <body>
     <nav>
         <div class="logo">Portfolio</div>
-        <ul class="nav-links">
+        <ul class="nav-links" id="navMenu">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">Biography</a></li>
             <li><a href="#projects">Project</a></li>
@@ -403,6 +464,11 @@
                 <a href="https://www.linkedin.com/in/sashriya-m-b2013a296/" target="_blank">💼</a>
             </span>
         </div>
+        <div class="hamburger" onclick="toggleMenu()">☰
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
     </nav>
 
     <div class="content">
@@ -556,6 +622,11 @@
             duration: 1000,
             once: true
           });
+
+          function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+          }
     </script>
 </body>
 </html>
