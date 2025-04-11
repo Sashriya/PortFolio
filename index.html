@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>Sashriya | Portfolio</title>
+    <style>
+        * {
+            margin: 0; padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+            font-size: 16px;
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            transition: .3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            scroll-behavior: smooth;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background-color: #121212;
+            color: #f1f1f1;
+        }
+
+        body.dark-mode nav {
+            background: #1e1e1e;
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .section-title {
+            color: #f39c12;
+        }
+
+        body.dark-mode .portfolio-item {
+            background: #1e1e1e;
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .portfolio-item:hover {
+            background: #333;
+        }
+
+        body.dark-mode .btn {
+            background: #f39c12;
+            color: #121212;
+        }
+
+        body.dark-mode .btn:hover {
+            background: #e67e22;
+        }
+
+        body.dark-mode .nav-links li a {
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .nav-links li a:hover,
+        body.dark-mode .nav-links li a:active {
+            color: #f39c12;
+        }
+
+        body.dark-mode footer {
+            background: #1e1e1e;
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .contact-form input,
+        body.dark-mode .contact-form textarea {
+            background: #333;
+            color: #f1f1f1;
+            border: 1px solid #555;
+        }
+
+        body.dark-mode .contact-form input::placeholder,
+        body.dark-mode .contact-form textarea::placeholder {
+            color: #aaa;
+        }
+
+        body.dark-mode .toggle-mode {
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .toggle-mode:hover {
+            color: #f39c12;
+        }
+
+        body.dark-mode .social-icons a{
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .social-icons a:hover {
+            color: #f39c12;
+        }
+
+        body.dark-mode .nav-links li a:active {
+            color: #f39c12;
+        }
+
+        body.dark-mode .portfolio-item h3 {
+            color: #f39c12;
+        }
+
+        body.dark-mode .portfolio-item p {
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .portfolio-item a {
+            background: #f39c12;
+            color: #121212;
+        }
+
+        body.dark-mode .portfolio-item a:hover {
+            background: #e67e22;
+        }
+
+        body.dark-mode .service-list li {
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .service-list li:hover{
+            color: #f39c12;
+        }
+
+        body.dark-mode .service-list li::before {
+            margin-right: 5px;
+            color: #f39c12;
+        }
+
+        body.dark-mode .service-list li:hover::before {
+            color: #e67e22;
+        }
+        
+
+        nav {
+            background: #222;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav-links li a:hover {
+            color: #f39c12;
+            transition: .7s delay;
+        }
+
+        .social-icons a {
+            color: white;
+            margin-left: 15px;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            color: #f39c12;
+        }
+
+        .content {
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            padding: 20px;
+          }
+
+          .section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+          }
+      
+          /* Intro Section */
+          .intro {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+          }
+      
+          .profile-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid orange;
+            animation: pulse-glow 2s infinite;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+            grid-auto-flow: column;
+          }
+
+          .profile-photo:hover {
+            border: 4px solid #f39c12;
+            animation: pulse-glow 5s infinite;
+            box-shadow: 0 0 40px rgba(255,165, 0, 1);
+            transition: .7s;
+            transform: scale(1.05);
+          }
+
+          body.dark-mode .profile-photo {
+            border: 3px solid #f39c12;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.8);
+          }
+
+          body.dark-mode .profile-photo:hover {
+            border: 4px solid #f39c12;
+            animation: pulse-glow 5s infinite;
+            box-shadow: 0 0 40px rgba(255,165, 0, 1);
+            transition: .7s;
+          }
+      
+          .intro div {
+            flex: 1;
+            min-width: 250px;
+          }
+      
+          .intro h1 {
+            font-size: 2.5rem;
+            color: orange;
+          }
+      
+          .typing {
+            color: green;
+            font-weight: bold;
+            font-size: 1.3rem;
+            min-height: 1.5rem;
+          }
+      
+          .typing::after {
+            content: "|";
+            animation: blink 1s step-start infinite;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+          }
+      
+          @keyframes blink {
+            50% {
+              opacity: 0;
+            }
+          }
+      
+          .btn {
+            background-color: orange;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+          }
+      
+          .btn:hover {
+            background-color: darkorange;
+            animation: pulse 3s infinite;
+            box-shadow: 0 0 20px rgba(255, 165, 0, 0.8);
+            transform: scale(1.05);
+            transition: .7s;
+            background-color: darkorange;
+            box-shadow: 0 0 20px rgba(255, 165, 0, 1),
+                        0 0 30px rgba(255, 140, 0, 0.8);
+          }
+      
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-left: 5px solid #f39c12;
+            padding-left: 10px;
+        }
+
+        .section-title input {
+            width: 100%;
+            border: 1px solid #f39c12;
+            animation: pulse-glow 3s infinite;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .portfolio-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            animation: pulse-glow 3s infinite;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-8px);
+            animation: pulse-glow 5s infinite;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.8);
+            transition: .7s;
+        }
+
+        body.dark-mode .portfolio-item:hover {
+            background: #333;
+            animation: pulse-glow 5s infinite;
+            box-shadow: 0 0 40px rgba(255,165, 0, 1);
+            transition: .7s;
+        }
+
+        .service-list li {
+            margin: 10px 0;
+            padding: 5px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #222;
+            color: white;
+        }
+
+        .toggle-mode {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .intro {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+      
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Portfolio</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">Biography</a></li>
+            <li><a href="#projects">Project</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div>
+            <button class="toggle-mode" onclick="toggleDarkMode()">🌓</button>
+            <span class="social-icons">
+                <a href="https://www.instagram.com/_sashrii_2005_/" target="_blank">📸</a>
+                <a href="https://www.facebook.com/sashriya.murali.9" target="_blank">📘</a>
+                <a href="https://www.linkedin.com/in/sashriya-m-b2013a296/" target="_blank">💼</a>
+            </span>
+        </div>
+    </nav>
+
+    <div class="content">
+        <section id="home" class="section">
+            <div class="intro">
+              <img src="Photo.jpg" alt="Sashriya's Photo" class="profile-photo" />
+              <div>
+                <h1>Hello, I'm Sashriya</h1>
+                <div class="typing"></div>
+                <p>A passionate developer who blends creativity with code. I love building user-friendly websites, writing stories, and capturing moments through photography.</p>
+                <a href="#about" class="btn">Learn More</a>
+              </div>
+            </div>
+          </section>
+      
+
+        <section id="about" class="section">
+            <h2 class="section-title">Biography</h2>
+            <p>
+                I’m a passionate software developer dedicated to creating clean, user-friendly digital experiences that make a difference. With a strong foundation in front-end and back-end development, I focus on building intuitive platforms that are both functional and visually appealing. <br>
+
+                My recent work includes developing a cloth donation platform that bridges the gap between donors and communities in need—an initiative close to my heart, aimed at using tech for social good. <br>
+
+                Outside of coding, I have a deep appreciation for the arts and storytelling. Whether it's capturing moments through photography, designing impactful visuals with Adobe InDesign, or diving into the world of creative writing, I find joy in expression and detail. These creative pursuits often influence how I design and develop, allowing me to bring a unique perspective to the digital solutions I craft. <br>
+
+                Currently, I'm exploring projects that combine my technical skills with meaningful impact—building platforms for education, sustainability, and community connection. <br>
+
+                When I’m not coding or creating, you’ll likely find me behind a camera lens, sketching design ideas, or writing short stories. <br> 
+            </p>
+        </section>
+
+        <!-- Place this new section right after the existing Portfolio section -->
+
+<section id="projects" class="section">
+    <h2 class="section-title">Projects</h2>
+    <div class="portfolio-grid">
+        <div class="portfolio-item">
+            <h3>Food Share</h3>
+            <p>A platform for donating food for who suffering from poverty and reducing Food Wastage.</p>
+            <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript, Firebase</p>
+            <a href="https://food-share-tau.vercel.app/" class="btn">View Project</a>
+        </div>
+
+        <div class="portfolio-item">
+            <h3>Mentor Hub - Tutor Management System</h3>
+            <p>A Platform for Student who suffering from background Unstability.</p>
+            <p><strong>Tech Stack:</strong> Html, CSS, MySQL, Python, JS</p>
+            <a href="https://mentor-hub-gamma.vercel.app/" class="btn">View Project</a>
+        </div>
+
+        <div class="portfolio-item">
+            <h3>State Culture Info Website</h3>
+            <p>The State in India is displayed.</p>
+            <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript</p>
+            <a href="https://states-roan.vercel.app/" class="btn">View Project</a>
+        </div>
+
+        <div class="portfolio-item">
+            <h3>My Photography</h3>
+            <p>An Website for Uploading Photo and Memory</p>
+            <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript, Firebase</p>
+            <a href="https://my-photography-chi.vercel.app/" class="btn">View Project</a>
+        </div>
+
+        <div class="portfolio-item">
+            <h3>HopesFoundations</h3>
+            <p>A Platform for donating Clothes and Collecting at Door Step.</p>
+            <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript</p>
+            <a href="https://hopefoundations.vercel.app/" class="btn">Play Game</a>
+        </div>
+
+        <div class="portfolio-item">
+            <h3>Eco-Plastic Innovators</h3>
+            <p>DIY Recycling HUB and Making Home Decors with the plastic Waste in Home.</p>
+            <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript</p>
+            <a href="https://eco-plastic-innovators.vercel.app/" class="btn">Play Game</a>
+        </div>
+    </div>
+</section>
+
+        <section id="services" class="section">
+            <h2 class="section-title">Services</h2>
+            <ul class="service-list">
+                <li>🌐 Frontend Development</li>
+                <li>🎨 Graphic Design (Canva, Figma, InDesign)</li>
+                <li>📷 Photography & Photo Editing</li>
+                <li>✍️ Content & Creative designing</li>
+                <li>🎥 Video Editing</li>
+                <li>💻 WordPress Developer</li>
+            </ul>
+        </section>
+
+        <section id="contact" class="section">
+            <h2 class="section-title">Contact Me</h2>
+            <form id="contact-form" class="contact-form" onsubmit="return handleSubmit(event)">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </section>
+    </div>
+
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // Typing effect
+        const typingElement = document.querySelector(".typing");
+  const roles = ["Frontend Developer", "Photographer", "Video and Photo Editor", "Creative Designer", "DTP Developer", "WordPress Developer"];
+  let index = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+
+  function typeEffect() {
+    const currentRole = roles[index];
+    if (isDeleting) {
+      typingElement.textContent = currentRole.substring(0, charIndex--);
+      if (charIndex < 0) {
+        isDeleting = false;
+        index = (index + 1) % roles.length;
+      }
+    } else {
+      typingElement.textContent = currentRole.substring(0, charIndex++);
+      if (charIndex > currentRole.length) {
+        isDeleting = true;
+        setTimeout(typeEffect, 200);
+        return;
+      }
+    }
+    setTimeout(typeEffect, isDeleting ? 100 : 100);
+  }
+
+  typeEffect();
+        // Dark mode toggle
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+
+        // Simple form handler
+        function handleSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const message = document.getElementById("message").value;
+            alert(`Thank you ${name}! Your message has been received.`);
+            document.getElementById("contact-form").reset();
+        }
+
+        AOS.init({
+            duration: 1000,
+            once: true
+          });
+    </script>
+</body>
+</html>
