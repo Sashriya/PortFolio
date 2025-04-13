@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <title>Sashriya | Portfolio</title>
+    <title>Portfolio</title>
     <style>
         * {
             margin: 0; padding: 0;
@@ -325,7 +325,7 @@
           
 
         nav {
-            background: #1e1e1e;
+            background: #272727;
             color: white;
             padding: 1rem 2rem;
             display: flex;
@@ -334,6 +334,12 @@
             position: sticky;
             top: 0;
             z-index: 999;
+            overflow: hidden;
+            height: 60px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding-left: 20px;
+            width: 100%; 
+            font-weight: bold;
         }
 
         .logo {
@@ -646,6 +652,21 @@
             transition: transform 0.3s;
             animation: pulse-glow 3s infinite;
             box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+            padding-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 2px solid rgb(9, 9, 9);
+        }
+
+        body.dark-mode .portfolio-item img {
+            border: 2px solid #f39c12;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
         }
 
         .portfolio-item:hover {
@@ -654,6 +675,24 @@
             box-shadow: 0 0 20px rgba(255, 165, 0, 1),
             0 0 30px rgba(255, 140, 0, 0.8);
             transition: .4s;
+        }
+
+        .portfolio-item .btn {
+          background-color: orange;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 0 10px rgb(255, 166, 2);
+            margin-left: 10px;
+            position: relative;
+            align-items: end;
         }
 
         body.dark-mode .portfolio-item:hover {
@@ -667,6 +706,33 @@
         .service-list li {
             margin: 10px 0;
             padding: 5px;
+        }
+
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+            max-width: 1000px;
+            margin: 20px auto;
+        }
+        
+        .contact-map {
+            height: 300px;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 10px;
+            flex: 1 1 45%;
+        }
+
+        
+        .contact-form {
+            flex: 1 1 45%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px;
         }
 
         .contact-form input,
@@ -849,8 +915,10 @@
             font-size: 1.04rem;
             font-weight: bold;
             color: black;
-            margin-bottom: 10px;
+            margin-bottom: 10px; /* Increased from 10px to 20px */
+            display: inline-block; /* Ensure margin-bottom takes effect */
         }
+        
         
         body.dark-mode .skill span {
             color: #f1f1f1;
@@ -889,9 +957,11 @@
             transition: width 0.3s ease;
         }
 
-        .map {
-            height: 80%;
-            width: 80%;
+        
+          .leaflet-top.leaflet-left {
+            top: 10px; /* Pushes it below your navbar */
+            overflow: hidden;
+            z-index: 1001;
           }
     </style>
 </head>
@@ -902,7 +972,7 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#about">Biography</a></li>
             <li><a href="#projects">Project</a></li>
-            <li><a href="#services">Services</a></li>
+            <li><a href="#skills">Skills</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <div>
@@ -946,8 +1016,11 @@
                 Currently, I'm exploring projects that combine my technical skills with meaningful impact—building platforms for education, sustainability, and community connection. <br>
 
                 When I’m not coding or creating, you’ll likely find me behind a camera lens, sketching design ideas, or writing short stories. <br> 
+
+                <b>My Extracurricular Activity - Badminton, Marathon, Singing, Dance, Drawing and Photography.</b>
             </p>
         </section>
+        
 
         <!-- Place this new section right after the existing Portfolio section -->
 
@@ -955,44 +1028,44 @@
     <h2 class="section-title">Projects</h2>
     <div class="portfolio-grid">
         <div class="portfolio-item">
-            <h3>Food Share</h3>
+          <img src="FS.png" alt="Food Share" class="portfolio-image" width="250px" height="130px">
+            <h3>Food Share - Ensuring NoBody Sleep with Hunger</h3>
             <p>A platform for donating food for who suffering from poverty and reducing Food Wastage.</p>
-            <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript, Firebase</p>
             <a href="https://food-share-tau.vercel.app/" class="btn">View Project</a>
         </div>
 
         <div class="portfolio-item">
+          <img src="MH.png" alt="Mentor hub" class="portfolio-image" width="250px" height="130px">
             <h3>Mentor Hub - Tutor Management System</h3>
             <p>A Platform for Student who suffering from background Unstability.</p>
-            <p><strong>Tech Stack:</strong> Html, CSS, MySQL, Python, JS</p>
             <a href="https://mentor-hub-gamma.vercel.app/" class="btn">View Project</a>
         </div>
 
         <div class="portfolio-item">
-            <h3>State Culture Info Website</h3>
-            <p>The State in India is displayed.</p>
-            <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript</p>
+          <img src="state.png" alt="State" class="portfolio-image" width="250px" height="130px">
+            <h3>CultureVista - State Culture Info Website</h3>
+            <p>The State in India is displayed. Let Us Explore the Vast and Rich Culture and Places of India.</p>
             <a href="https://states-roan.vercel.app/" class="btn">View Project</a>
         </div>
 
         <div class="portfolio-item">
+          <img src="MP.png" alt="My Photography" class="portfolio-image" width="250px" height="130px">
             <h3>My Photography</h3>
             <p>An Website for Uploading Photo and Memory</p>
-            <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript, Firebase</p>
             <a href="https://my-photography-chi.vercel.app/" class="btn">View Project</a>
         </div>
 
         <div class="portfolio-item">
+          <img src="HF.png" alt="HopesFoundation" class="portfolio-image" width="250px" height="130px">
             <h3>HopesFoundations</h3>
             <p>A Platform for donating Clothes and Collecting at Door Step.</p>
-            <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript</p>
             <a href="https://hopefoundations.vercel.app/" class="btn">Play Game</a>
         </div>
 
         <div class="portfolio-item">
+          <img src="DIY.png" alt="Eco-Plastuc Innovators" class="portfolio-image" width="250px" height="130px">
             <h3>Eco-Plastic Innovators</h3>
-            <p>DIY Recycling HUB and Making Home Decors with the plastic Waste in Home.</p>
-            <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript</p>
+            <p>Making Home Decors with the plastic Waste in Home.</p>
             <a href="https://eco-plastic-innovators.vercel.app/" class="btn">Play Game</a>
         </div>
     </div>
@@ -1031,12 +1104,6 @@
         </div>
     </div>
     <div class="skill">
-        <span>Photography & Photo Editing</span>
-        <div class="progress-bar">
-            <div class="progress" style="width: 80%;">80%</div>
-        </div>
-    </div>
-    <div class="skill">
         <span>WordPress</span>
         <div class="progress-bar">
             <div class="progress" style="width: 75%;">75%</div>
@@ -1044,17 +1111,16 @@
     </div>
 </section>
 
-        <section id="contact" class="section">
-            <h2 class="section-title">Contact</h2>
-            <div id="map" style="height: 300px; width: 100%; max-width: 700px; margin: 20px auto; border-radius: 10px;"></div>
-            <form id="contact-form" class="contact-form" onsubmit="return handleSubmit(event)">
-                <input type="text" id="name" placeholder="Your Name" required>
-                <input type="email" id="email" placeholder="Your Email" required>
-                <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
-                <button type="submit" class="btn">Send Message</button>
-            </form>
-        </section>
-    </div>
+<h2 class="section-title">Contact</h2>
+<div id="contact" class="contact-container">
+    <div id="map" class="contact-map"></div>
+    <form id="contact-form" class="contact-form" onsubmit="return handleSubmit(event)">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+    </form>
+</div>
 
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -1063,7 +1129,7 @@
     <script>
         // Typing effect
         const typingElement = document.querySelector(".typing");
-  const roles = ["Frontend Developer", "Photographer", "Video and Photo Editor", "Creative Designer", "DTP Developer", "WordPress Developer"];
+  const roles = ["Frontend Developer", "Video Editor", "Creative Designer", "DTP Developer", "WordPress Developer"];
   let index = 0;
   let charIndex = 0;
   let isDeleting = false;
