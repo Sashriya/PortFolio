@@ -27,7 +27,7 @@
             color: #333;
             scroll-behavior: smooth;
             transition: background 0.3s, color 0.3s;
-            cursor: none;
+            cursor: flex;
             background-color: var(--background);
             color: var(--text-color);
         }
@@ -177,23 +177,6 @@
         body.dark-mode .portfolio-item a:hover {
             background: #e67e22;
         }
-
-        body.dark-mode .service-list li {
-            color: #f1f1f1;
-        }
-
-        body.dark-mode .service-list li:hover{
-            color: #f39c12;
-        }
-
-        body.dark-mode .service-list li::before {
-            margin-right: 5px;
-            color: #f39c12;
-        }
-
-        body.dark-mode .service-list li:hover::before {
-            color: #e67e22;
-        }
         
         .cursor {
             position: fixed;
@@ -322,73 +305,166 @@
               transform: scale(0.5) translateY(-10px);
             }
           }
-          
+          @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        nav {
-            background: #272727;
-            color: white;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 999;
-            overflow: hidden;
-            height: 60px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            padding-left: 20px;
-            width: 100%; 
-            font-weight: bold;
-        }
+    body {
+      font-family: sans-serif;
+      background-color: #f0f0f0;
+      color: #111;
+      transition: background-color 0.4s ease;
+      padding-top: 90px; /* Push content below navbar */
+    }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            line-height: 1.2;
-        }
+    .dark-mode {
+      background-color: #000;
+      color: #fff;
+    }
 
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-            line-height: 1.5;
-        }
+    nav.navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #111;
+      color: white;
+      padding: 15px 25px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+      z-index: 999;
+      border-radius: 0 0 16px 16px;
+      transition: background-color 0.3s, box-shadow 0.3s ease;
+    }
 
-        .nav-links li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            line-height: 1.5;
-        }
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+    }
 
-        .nav-links li a:hover {
-            color: #f39c12;
-            transition: .4s delay;
-        }
+    .extra-items {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-        .social-icons a {
-            color: white;
-            margin-left: 15px;
-            text-decoration: none;
-        }
+    .toggle-mode {
+      background: none;
+      border: 2px solid white;
+      border-radius: 50%;
+      font-size: 22px;
+      color: white;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+    }
 
-        .social-icons a:hover {
-            color: #f39c12;
-        }
+    .toggle-mode:hover {
+      transform: scale(1.1);
+      background: rgba(255,255,255,0.1);
+    }
 
-        .social-icons .floaty {
-            animation: float 3s ease-in-out infinite;
-          }
-          
-          @keyframes float {
-            0%, 100% {
-              transform: translateY(0px);
-            }
-            50% {
-              transform: translateY(-10px);
-            }
-          }
+    .social-icons a {
+      font-size: 22px;
+      text-decoration: none;
+      margin-left: 8px;
+      color: white;
+      transition: transform 0.2s ease, color 0.3s;
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.2);
+      color: #ffa500;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      margin-left: 15px;
+    }
+
+    .hamburger span {
+      width: 26px;
+      height: 3px;
+      background: white;
+      border-radius: 3px;
+      transition: all 0.4s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+
+    .nav-content {
+      display: none;
+      position: absolute;
+      top: 80px;
+      right: 25px;
+      background: #1c1c1c;
+      border-radius: 12px;
+      padding: 20px;
+      flex-direction: column;
+      gap: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    .nav-content.active {
+      display: flex;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 19px;
+    }
+
+    .nav-links li a {
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+      transition: color 0.3s;
+    }
+
+    .nav-links li a:hover {
+      color: orange;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links-desktop {
+        display: none;
+      }
+    }
           
 
         .content {
@@ -703,11 +779,6 @@
             transition: .4s;
         }
 
-        .service-list li {
-            margin: 10px 0;
-            padding: 5px;
-        }
-
         .contact-container {
             display: flex;
             flex-wrap: wrap;
@@ -724,6 +795,11 @@
             max-width: 450px;
             border-radius: 10px;
             flex: 1 1 45%;
+            border: #000 1.5px solid;
+        }
+
+        body.dark-mode .contact-map {
+          border: 1.5px solid rgb(255, 149, 0) ;
         }
 
         
@@ -792,106 +868,6 @@
             border: 1px solid #f39c12;
             outline: none;
         }
-
-        .toggle-mode {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            color: white;
-            cursor: pointer;
-        }
-
-        .toggle-mode:hover {
-            color: #f39c12;
-            transition: .4s;
-        }
-
-        @media (max-width: 768px) {
-            .intro {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .nav-links {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            justify-content: space-around;
-            width: 30px;
-            height: 30px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid #999;
-            border-radius: 10px;
-            padding: 2px;
-            cursor: pointer;
-            align-items: center;
-            padding-bottom: 20px;
-          }
-          
-          .hamburger span {
-            height: 3px;
-            background: #ccc;
-            border-radius: 2px;
-            margin: 4px 0;
-            transition: 0.3s;
-          }
-
-          .hamburger:hover {
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
-            animation: pulse-glow 5s infinite;  
-          }
-          
-
-          @media (max-width: 768px) {
-            .hamburger {
-              display: flex;
-              align-items: right;
-            }
-          
-            .nav-links {
-              position: absolute;
-              top: 60px;
-              left: 0;
-              background: #1e1e1e;
-              width: 100%;
-              flex-direction: column;
-              align-items: flex-start;
-              padding: 1rem 2rem;
-              transform: translateX(-100%);
-              transition: 0.3s ease-in-out;
-            }
-          
-            .nav-links.active {
-              transform: translateX(0);
-            }
-          
-            .nav-links li {
-              padding: 10px 0;
-              width: 100%;
-              font-size: 17px;
-            }
-
-            .nav-links li:hover {
-                font-size: 20px;
-                transition: .4s;
-            }
-          
-            .nav-links li a {
-              width: 100%;
-              display: inline-block;
-            }
-
-            .nav-links li a:hover {
-                color: #f39c12;
-                transition: .4s delay;
-            }
-          }
 
           @media (max-width: 768px) {
             body:not(.dark-mode) .section p,
@@ -962,33 +938,41 @@
             top: 210px; /* Pushes it below your navbar */
             overflow: hidden;
             z-index: 1001;
+            align-items: right;
+
           }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="logo">Portfolio</div>
-        <ul class="nav-links" id="navMenu">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">Biography</a></li>
-            <li><a href="#projects">Project</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div>
-            <button class="toggle-mode" onclick="toggleDarkMode()">🌓</button>
-            <span class="social-icons">
-                <a href="https://www.instagram.com/_sashrii_2005_/" target="_blank">📸</a>
-                <a href="https://www.facebook.com/sashriya.murali.9" target="_blank">📘</a>
-                <a href="https://www.linkedin.com/in/sashriya-m-b2013a296/" target="_blank">💼</a>
-            </span>
-        </div>
-        <div class="hamburger" onclick="toggleMenu()">☰
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-    </nav>
+  <nav class="navbar">
+    <div class="logo">Portfolio</div>
+
+    <div class="extra-items">
+      <button class="toggle-mode" onclick="toggleDarkMode()">🌓</button>
+      <span class="social-icons">
+        <a href="https://www.instagram.com/_sashrii_2005_/" target="_blank">📸</a>
+        <a href="https://www.facebook.com/sashriya.murali.9" target="_blank">📘</a>
+        <a href="https://www.linkedin.com/in/sashriya-m-b2013a296/" target="_blank">💼</a>
+      </span>
+    </div>
+
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="nav-content" id="navContent">
+      <ul class="nav-links" id="navMenu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">Biography</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+  
 
     <div class="content">
         <section id="home" class="section">
@@ -1174,10 +1158,24 @@
             once: true
           });
 
-          function toggleMenu() {
-            const menu = document.getElementById('navMenu');
-            menu.classList.toggle('active');
-          }
+          const hamburger = document.getElementById('hamburger');
+    const navContent = document.getElementById('navContent');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navContent.classList.toggle('active');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !navContent.contains(e.target)) {
+        hamburger.classList.remove('active');
+        navContent.classList.remove('active');
+      }
+    });
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
 
           const cursor = document.createElement('div');
           cursor.classList.add('cursor');
