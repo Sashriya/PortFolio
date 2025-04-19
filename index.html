@@ -33,6 +33,9 @@
             cursor: none;
         }
 
+         
+        
+
         :root {
             --primary: #f39c12;
             --background: #f5f7fa;
@@ -180,35 +183,71 @@
         }
         
         .cursor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #ffcc00, #ff8800);
-            box-shadow: 0 0 10px #ffd700, 0 0 20px #ffaa00, 0 0 30px #ffcc00;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            animation: pulse 1s infinite ease-in-out;
-            cursor: none;
-          }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  z-index: 9999;
+  mix-blend-mode: lighten;
+  cursor: none;
+}
 
-          body.dark-mode .cursor {
-            background: radial-gradient(circle, #ffcc00, #ff8800);
-            box-shadow: 0 0 10px #ffd700, 0 0 20px #ffaa00, 0 0 30px #ffcc00;
-            animation: pulse-glow 2s infinite;
-          }
+/* LIGHT MODE – Normal appearance */
+body:not(.dark-mode) .cursor {
+  background: radial-gradient(circle, #ffcc00, #ff8800);
+  box-shadow: 0 0 12px #ffd700, 0 0 24px #ffaa00, 0 0 36px #ffcc00;
+  animation: cursorPulse 1.5s infinite ease-in-out, cursorGlowShift 6s infinite alternate;
+  opacity: 1;
+}
 
-          body.dark-mode .cursor:hover {
-            background: radial-gradient(circle, #ffcc00, #ff8800);
-            box-shadow: 0 0 10px #ffd700, 0 0 20px #ffaa00, 0 0 30px #ffcc00;
-            animation: pulse-glow 5s infinite;
-            transition: .4s;
-            transform: scale(1.05);
-            background-color: darkorange;
-          }
+/* DARK MODE – Hidden by default */
+body.dark-mode .cursor {
+  background: transparent;
+  box-shadow: none;
+  opacity: 0;
+}
+
+/* DARK MODE – Show on buttons, nav, images */
+body.dark-mode button:hover ~ .cursor,
+body.dark-mode .btn:hover ~ .cursor,
+body.dark-mode nav:hover ~ .cursor,
+body.dark-mode .profile-photo:hover ~ .cursor,
+body.dark-mode a:hover ~ .cursor {
+  background: radial-gradient(circle, #ffcc00, #ff8800);
+  box-shadow: 0 0 12px #ffd700, 0 0 24px #ffaa00, 0 0 36px #ffcc00;
+  animation: cursorPulse 1.5s infinite ease-in-out, cursorGlowShift 6s infinite alternate;
+  opacity: 1;
+}
+
+/* Cursor scaling on hover if needed */
+body.dark-mode button:hover ~ .cursor,
+body.dark-mode .btn:hover ~ .cursor,
+body.dark-mode nav:hover ~ .cursor,
+body.dark-mode .profile-photo:hover ~ .cursor,
+body.dark-mode a:hover ~ .cursor {
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+/* Animations */
+@keyframes cursorPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.15); }
+}
+
+@keyframes cursorGlowShift {
+  0% {
+    box-shadow: 0 0 10px #ffe066, 0 0 20px #ffaf40, 0 0 30px #ffc300;
+  }
+  100% {
+    box-shadow: 0 0 15px #ffcc00, 0 0 25px #ffaa00, 0 0 40px #ff8800;
+  }
+}
+
 
           .cursor .btn{
             background-color: orange;
@@ -467,7 +506,7 @@
       }
       .profile-photo {
         align-items: center;
-        margin-left: 50px;
+        margin-left: 100px;
       }
     }
           
@@ -495,9 +534,17 @@
             color: #555;
           }
 
+          .section p b {
+            color: black;
+          }
+
           body.dark-mode .section p {
             line-height: 30px;
             color: #f1f1f1;
+          }
+
+          body.dark-mode .section p b {
+            color: #e0e0e0;
           }
 
          @media (max-width: 768px) {
@@ -719,71 +766,103 @@
           }
           
 
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
+          .portfolio-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
 
-        .portfolio-item {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-            animation: pulse-glow 3s infinite;
-            box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
-            padding-bottom: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-        }
+    .portfolio-item {
+      background: rgb(246, 237, 237);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+      width: 250px;
+      box-shadow: 0 4px 10px rgb(255, 136, 0); /* Bright yellow box-shadow */
+    }
 
-        .portfolio-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            border: 2px solid rgb(9, 9, 9);
-        }
+    body.dark-mode .portfolio-item {
+      background: #1e1e1e;
+    }
 
-        body.dark-mode .portfolio-item img {
-            border: 2px solid #f39c12;
-            box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
-        }
+    .portfolio-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 15px rgba(255, 153, 0, 0.8); /* Hover effect with brighter yellow */
+    }
 
-        .portfolio-item:hover {
-            transform: translateY(-8px);
-            animation: pulse-glow 5s infinite;
-            box-shadow: 0 0 20px rgba(255, 165, 0, 1),
-            0 0 30px rgba(255, 140, 0, 0.8);
-            transition: .4s;
-        }
+    .portfolio-image {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
 
-        .portfolio-item .btn {
-          background-color: orange;
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            margin-top: 1rem;
-            font-size: 1rem;
-            text-decoration: none;
-            display: inline-block;
-            transition: background-color 0.3s ease;
-            box-shadow: 0 0 10px rgb(255, 166, 2);
-            margin-left: 10px;
-            position: relative;
-            align-items: end;
-        }
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: #ebe1e1;
+      color: black;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgb(255, 140, 0); /* Bright yellow box-shadow for popup */
+      z-index: 2000;
+      width: 90%;
+      max-width: 500px;
+      transition: 0.3s ease;
+    }
 
-        body.dark-mode .portfolio-item:hover {
-            background: #333;
-            animation: pulse-glow 5s infinite;
-            box-shadow: 0 0 20px rgba(255, 165, 0, 1),
-            0 0 30px rgba(255, 140, 0, 0.8);
-            transition: .4s;
-        }
+    body.dark-mode .popup {
+      background-color: #1e1e1e;
+      color: #ccc;
+    }
 
+    .popup.active {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popup-close {
+      background: red;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      float: right;
+      cursor: pointer;
+    }
+
+    .popup h3 {
+      margin-bottom: 10px;
+    }
+
+    .popup a {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 25px;
+      background-color: orange;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .popup a:hover {
+      background-color: #e69500;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .portfolio-item {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
         .contact-container {
             display: flex;
             flex-wrap: wrap;
@@ -988,7 +1067,7 @@
                 <h1>Hello, I'm Sashriya</h1>
                 <div class="typing"></div>
                 <p>I'm a Student at KSR Institute for Engineering and Technology and currently pursuing Computer Science Engineering and I am passionate developer who blends creativity with code. I love building user-friendly websites, writing stories, and capturing moments through photography.</p>
-                <a href="#about" class="btn">Learn More</a>
+                <a href="Sashriya_resume.pdf" class="btn">Download Resume</a>
               </div>
             </div>
           </section>
@@ -997,15 +1076,11 @@
         <section id="about" class="section">
             <h2 class="section-title">Biography</h2>
             <p>
-                I’m a passionate software developer dedicated to creating clean, user-friendly digital experiences that make a difference. With a strong foundation in front-end and back-end development, I focus on building intuitive platforms that are both functional and visually appealing. <br>
+              I’m a passionate software developer focused on building clean, user-friendly digital experiences. With strengths in both front-end development, I create platforms that are functional, intuitive, and visually engaging.
 
-                My recent work includes developing a cloth donation platform that bridges the gap between donors and communities in need—an initiative close to my heart, aimed at using tech for social good. <br>
-
-                Outside of coding, I have a deep appreciation for the arts and storytelling. Whether it's capturing moments through photography, designing impactful visuals with Adobe InDesign, or diving into the world of creative writing, I find joy in expression and detail. These creative pursuits often influence how I design and develop, allowing me to bring a unique perspective to the digital solutions I craft. <br>
-
-                Currently, I'm exploring projects that combine my technical skills with meaningful impact—building platforms for education, sustainability, and community connection. <br>
-
-                When I’m not coding or creating, you’ll likely find me behind a camera lens, sketching design ideas, or writing short stories. <br> 
+              My recent projects include a cloth donation website connecting donors to communities in need an initiative that reflects my commitment to using tech for social good.
+              
+              Beyond coding, I explore photography and design (InDesign) bringing a creative eye to every project.  <br>
 
                 <b>My Extracurricular Activity - Badminton, Marathon, Singing, Dance, Drawing and Photography.</b>
             </p>
@@ -1014,52 +1089,89 @@
 
         <!-- Place this new section right after the existing Portfolio section -->
 
-<section id="projects" class="section">
-    <h2 class="section-title">Projects</h2>
-    <div class="portfolio-grid">
-        <div class="portfolio-item">
-          <img src="FS.png" alt="Food Share" class="portfolio-image" width="250px" height="130px">
-            <h3>Food Share - Ensuring NoBody Sleep with Hunger</h3>
-            <p>A platform for donating food for who suffering from poverty and reducing Food Wastage.</p>
-            <a href="https://food-share-tau.vercel.app/" class="btn">View Project</a>
+        <section id="projects" class="section">
+          <h2 class="section-title">Projects</h2>
+          <div class="portfolio-grid">
+            <!-- Portfolio Item 1 -->
+            <div class="portfolio-item" onclick="openPopup('popup1')">
+              <img src="FS.png" alt="Food Share" class="portfolio-image">
+              <h3>Food Share - Ensuring NoBody Sleep with Hunger</h3>
+            </div>
+        
+            <!-- Portfolio Item 2 -->
+            <div class="portfolio-item" onclick="openPopup('popup2')">
+              <img src="MH.png" alt="Mentor hub" class="portfolio-image">
+              <h3>Mentor Hub - Tutor Management System</h3>
+            </div>
+        
+            <!-- Portfolio Item 3 -->
+            <div class="portfolio-item" onclick="openPopup('popup3')">
+              <img src="state.png" alt="State" class="portfolio-image">
+              <h3>CultureVista - State Culture Info Website</h3>
+            </div>
+        
+            <!-- Portfolio Item 4 -->
+            <div class="portfolio-item" onclick="openPopup('popup4')">
+              <img src="MP.png" alt="My Photography" class="portfolio-image">
+              <h3>My Photography</h3>
+            </div>
+        
+            <!-- Portfolio Item 5 -->
+            <div class="portfolio-item" onclick="openPopup('popup5')">
+              <img src="HF.png" alt="HopesFoundation" class="portfolio-image">
+              <h3>HopesFoundations</h3>
+            </div>
+        
+            <!-- Portfolio Item 6 -->
+            <div class="portfolio-item" onclick="openPopup('popup6')">
+              <img src="DIY.png" alt="Eco-Plastuc Innovators" class="portfolio-image">
+              <h3>Eco-Plastic Innovators</h3>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Popup Cards -->
+        <div class="popup" id="popup1">
+          <button class="popup-close" onclick="closePopup('popup1')">X</button>
+          <h3>Food Share - Ensuring NoBody Sleep with Hunger</h3>
+          <p>A platform for donating food for those suffering from poverty and reducing food wastage.</p>
+          <a href="https://food-share-tau.vercel.app/" target="_blank">View Project</a>
         </div>
-
-        <div class="portfolio-item">
-          <img src="MH.png" alt="Mentor hub" class="portfolio-image" width="250px" height="130px">
-            <h3>Mentor Hub - Tutor Management System</h3>
-            <p>A Platform for Student who suffering from background Unstability.</p>
-            <a href="https://mentor-hub-gamma.vercel.app/" class="btn">View Project</a>
+        
+        <div class="popup" id="popup2">
+          <button class="popup-close" onclick="closePopup('popup2')">X</button>
+          <h3>Mentor Hub - Tutor Management System</h3>
+          <p>A platform for students who are suffering from background instability.</p>
+          <a href="https://mentor-hub-gamma.vercel.app/" target="_blank">View Project</a>
         </div>
-
-        <div class="portfolio-item">
-          <img src="state.png" alt="State" class="portfolio-image" width="250px" height="130px">
-            <h3>CultureVista - State Culture Info Website</h3>
-            <p>The State in India is displayed. Let Us Explore the Vast and Rich Culture and Places of India.</p>
-            <a href="https://states-roan.vercel.app/" class="btn">View Project</a>
+        
+        <div class="popup" id="popup3">
+          <button class="popup-close" onclick="closePopup('popup3')">X</button>
+          <h3>CultureVista - State Culture Info Website</h3>
+          <p>This website showcases the rich culture, heritage, and places of different states in India.</p>
+          <a href="https://states-roan.vercel.app/" target="_blank">View Project</a>
         </div>
-
-        <div class="portfolio-item">
-          <img src="MP.png" alt="My Photography" class="portfolio-image" width="250px" height="130px">
-            <h3>My Photography</h3>
-            <p>An Website for Uploading Photo and Memory</p>
-            <a href="https://my-photography-chi.vercel.app/" class="btn">View Project</a>
+        
+        <div class="popup" id="popup4">
+          <button class="popup-close" onclick="closePopup('popup4')">X</button>
+          <h3>My Photography</h3>
+          <p>An interactive website for uploading photos and memories.</p>
+          <a href="https://my-photography-chi.vercel.app/" target="_blank">View Project</a>
         </div>
-
-        <div class="portfolio-item">
-          <img src="HF.png" alt="HopesFoundation" class="portfolio-image" width="250px" height="130px">
-            <h3>HopesFoundations</h3>
-            <p>A Platform for donating Clothes and Collecting at Door Step.</p>
-            <a href="https://hopefoundations.vercel.app/" class="btn">Play Game</a>
+        
+        <div class="popup" id="popup5">
+          <button class="popup-close" onclick="closePopup('popup5')">X</button>
+          <h3>HopesFoundations</h3>
+          <p>A platform for donating clothes and collecting donations at doorsteps.</p>
+          <a href="https://hopefoundations.vercel.app/" target="_blank">View Project</a>
         </div>
-
-        <div class="portfolio-item">
-          <img src="DIY.png" alt="Eco-Plastuc Innovators" class="portfolio-image" width="250px" height="130px">
-            <h3>Eco-Plastic Innovators</h3>
-            <p>Making Home Decors with the plastic Waste in Home.</p>
-            <a href="https://eco-plastic-innovators.vercel.app/" class="btn">Play Game</a>
+        
+        <div class="popup" id="popup6">
+          <button class="popup-close" onclick="closePopup('popup6')">X</button>
+          <h3>Eco-Plastic Innovators</h3>
+          <p>Making home decors from plastic waste at home.</p>
+          <a href="https://eco-plastic-innovators.vercel.app/" target="_blank">View Project</a>
         </div>
-    </div>
-</section>
 
 <section id="skills" class="section">
     <h2 class="section-title">Skills Attained</h2>
@@ -1119,7 +1231,7 @@
     <script>
         // Typing effect
         const typingElement = document.querySelector(".typing");
-  const roles = ["Frontend Developer", "Video Editor", "Creative Designer", "DTP Developer", "WordPress Developer"];
+  const roles = ["Frontend Developer", "Video Editor", "Creative Designer", "DTP Designer", "WordPress Developer"];
   let index = 0;
   let charIndex = 0;
   let isDeleting = false;
@@ -1218,6 +1330,15 @@
     const pos = marker.getLatLng();
     console.log("New location:", pos.lat, pos.lng);
   });
+
+  function openPopup(id) {
+    document.getElementById(id).classList.add("active");
+  }
+
+  function closePopup(id) {
+    document.getElementById(id).classList.remove("active");
+  }
+
     </script>
 </body>
 </html>
